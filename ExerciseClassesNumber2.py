@@ -8,6 +8,7 @@ class Stack(list):
     
     def __init__(self, size):
         super().__init__()
+        #list.__init__(self)
         if isinstance(size, int) and size > 0 and size < Stack.__MAX_SIZE:
             self.__maxSize=size
         else:
@@ -21,8 +22,8 @@ class Stack(list):
         return f"({len(self)}/{self.maxSize}) {super().__repr__()}"
 
     def __eq__(self, other):
-        return self.maxSize == other.maxSize and super().__eq__(self, other)
-    
+        #return self.maxSize == other.maxSize and super().__eq__(other)
+        return self.maxSize == other.maxSize and list.__eq__(self, other)
     def push(self, value):
         if len(self) >= self.maxSize: #The stack is full
             raise Exception("Stack full!")
@@ -79,6 +80,7 @@ if __name__ == "__main__":
     
     s1.serialize("data.pick")
     s4=Stack.deserialize("data.pick")
+    
     print(s4)
     print(len(s1)) # 3
     print(len(s1)) # 3
@@ -97,14 +99,24 @@ if __name__ == "__main__":
     top=s1.peek()
     print(top) # 24
     print(s1) # (1/10) [24]
-    s2=Stack(20) # 20 is the maximum size of the Stack
+    s2=Stack(10) # 20 is the maximum size of the Stack
     s2.push(24)
     print(s2)
+    print(s1)
     print(s1==s2)
     s2.extendMaxSize(25)
     print(s2)
     s2.clear()
     print(s2)
-    
+    s1.push(25)
+    s1.push(27)
     for e in s1:
         print(e)
+    s1.remove(25)
+    print(s1[0])
+    
+    
+    
+    
+    
+    
